@@ -1,11 +1,11 @@
-/* Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
- *
- * Derived from AdBuster:
- * Copyright (C) 2016 Daniel Brodie <dbrodie@gmail.com>
- *
+/*
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, version 3.
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
+ * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
 package org.jak_linux.dns66.vpn;
 
@@ -23,18 +23,6 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
-
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.MainActivity;
-import org.pcap4j.packet.IllegalRawDataException;
-import org.pcap4j.packet.IpV4Packet;
-import org.pcap4j.packet.UdpPacket;
-import org.pcap4j.packet.UnknownPacket;
-import org.xbill.DNS.Flags;
-import org.xbill.DNS.Message;
-import org.xbill.DNS.Rcode;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -55,6 +43,15 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 import java.util.Set;
+import org.jak_linux.dns66.Configuration;
+import org.jak_linux.dns66.FileHelper;
+import org.jak_linux.dns66.MainActivity;
+import org.pcap4j.packet.IpV4Packet;
+import org.pcap4j.packet.UdpPacket;
+import org.pcap4j.packet.UnknownPacket;
+import org.xbill.DNS.Flags;
+import org.xbill.DNS.Message;
+import org.xbill.DNS.Rcode;
 
 
 class AdVpnThread implements Runnable {
