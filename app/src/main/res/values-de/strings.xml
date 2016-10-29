@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_export">Einstellungen exportieren</string>
+    <string name="action_about">Über</string>
+    <string name="action_import">Einstellungen importieren</string>
+    <string name="action_save">Speichern</string>
+    <string name="app_shortdesc">Hosts sperren und DNS-Server anpassen</string>
+    <string name="custom_dns">Eigene DNS-Server verwenden</string>
+    <string name="dns_tab">DNS-Server</string>
+    <string name="enable_hosts">Filtern von Domänen aktivieren</string>
+    <string name="hosts_tab">Domänen-Filter</string>
+    <string name="info_app_license">"Dieses Programm ist freie Software. Sie können es unter den Bedingungen der GNU General Public License, wie von der Free Software Foundation veröffentlicht, weitergeben und/oder modifizieren, entweder gemäß Version 3 der Lizenz oder (nach Ihrer Option) jeder späteren Version. "</string>
+    <string name="load_defaults">Standardeinstellungen laden</string>
+    <string name="switch_onboot">Automatisch beim Systemstart aktivieren</string>
+    <string name="start_tab">Start / Stop</string>
+    <string name="start_description">Lange drücken um an- bzw. abzuschalten</string>
+    <string name="activity_edit">Eintrag bearbeiten</string>
+    <string name="action">Regel</string>
+    <string name="location">Ort (URL oder Host)</string>
+    <string name="title">Titel</string>
+    <string-array name="item_states">
+        <item>Verbieten</item>
+        <item>Erlauben</item>
+        <item>Ignorieren</item>
+    </string-array>
+    <string name="action_refresh">Filterlisten aktualisieren</string>
+    <string name="action_restore">Vorherige Einstellungen wiederherstellen</string>
+    <string name="cannot_load_default_config">Standardeinstellungen konnten nicht gelesen werden: %s - Das sollte nicht passieren!</string>
+    <string name="cannot_read_config">Kann Einstellungen nicht lesen: %s</string>
+    <string name="cannot_restore_previous_config">Kann vorherige Einstellungen nicht wiederherstellen: %s</string>
+    <string name="cannot_write_config">Kann Einstellungen nicht speichern: %s</string>
+    <string name="notification_reconnecting">Verbindung wird wiederhergestellt</string>
+    <string name="notification_reconnecting_error">Verbindung konnte nicht wiederhergestellt werden</string>
+    <string name="notification_running">Aktiv</string>
+    <string name="notification_starting">Am Starten</string>
+    <string name="notification_stopped">Inaktiv</string>
+    <string name="notification_stopping">Am Stoppen</string>
+    <string name="notification_title">DNS66</string>
+    <string name="notification_waiting_for_net">Warte auf Netzwerk</string>
+    <string name="translator_credits">Deutsche Übersetzung: Julian Andres Klode</string>
+    <string name="welcome_title">Willkommen bei DNS66</string>
+    <string name="welcome_title_start">(Noch) zu beachten</string>
+    <string name="welcome_message_start">
+        Wir sind noch nicht ganz fertig mit dem Nutzungserlebnis, daher:
+        \n\nStarte den Dienst nach dem Ändern von Einstellungen neu, damit diese aktiv werden.
+        \n\nAktualisiere die Filterlisten mindestens einmal vor dem ersten Start des Dienstes.
+    </string>
+    <string name="welcome_title_hosts">Hosts filtern</string>
+    <string name="welcome_message_hosts">
+        Definiere Filter anhand einer Filterlisten-URL oder dem Namen eines Hosts.
+        \n\nFilter nach Farben - Erlaube mit Grün, verbiete mit Rot, ignoriere mit Grau; wechsel per Klick.
+        \n\nÄndere die Reihenfolge - Für jeden Host gilt immer der letzte Filter, der für ihn definiert ist.
+    </string>
+    <string name="welcome_title_dns">DNS-Server konfigurieren</string>
+    <string name="welcome_message_dns">
+        Definiere einfach eigene DNS-Server.
+        \n\nWähle „erlaubt“, um einen Server zu nutzen oder einen anderen Wert, um ihn zu ignorieren.
+        \n\nÄndere die Reihenfolge - Der bevorzugte Server steht oben.
+    </string>
+    <string name="welcome_button_skip">Überspringen</string>
+    <string name="welcome_button_done">Fertig</string>
+    <string name="app_version_info">Version: %s</string>
+    <string name="missing_hosts_files_message">Eine oder mehrere der konfigurierten (nicht ignorierten) Filterlisten fehlen.\n\nVerwende die „Aktualisieren“-Aktion, um aktuelle Filterlisten herunterzuladen.\n\nTrotzdem fortfahren?</string>
+    <string name="missing_hosts_files_title">Fehlende Filterlisten</string>
+    <string name="button_yes">Ja</string>
+    <string name="button_no">Nein</string>
+</resources>

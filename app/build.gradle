@@ -1,0 +1,43 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 24
+    buildToolsVersion "24.0.3"
+    defaultConfig {
+        applicationId "org.jak_linux.dns66"
+        minSdkVersion 21
+        targetSdkVersion 24
+        versionCode 4
+        versionName "0.1.3"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        warning "MissingTranslation"
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:24.2.1'
+    compile 'com.android.support:support-v4:24.2.1'
+    compile 'com.android.support:design:24.2.1'
+    compile 'com.android.support:recyclerview-v7:24.2.1'
+    compile 'com.aurelhubert:ahbottomnavigation:1.5.1'
+    compile 'com.stephentuso:welcome:1.0.0'
+
+    // Proxy stuff
+    compile 'org.pcap4j:pcap4j-core:1.6.6'
+    compile 'org.pcap4j:pcap4j-packetfactory-propertiesbased:1.6.6'
+    compile 'dnsjava:dnsjava:2.1.7'
+
+    testCompile 'junit:junit:4.12'
+}
