@@ -1,6 +1,7 @@
-DNS-Based Ad Blocking for Android
-=================================
-This is a DNS based ad blocker for Android, based with Julian Andres Klode <jak@jak-linux.org>
+Android DNS Ad Blocking
+=======================
+This is a DNS based ad blocker for Android,
+based with   DNS66 application,Thanks with Julian Andres Klode <jak@jak-linux.org> 
 
 License
 -------
