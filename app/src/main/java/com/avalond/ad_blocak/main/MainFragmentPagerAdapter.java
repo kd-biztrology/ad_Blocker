@@ -7,12 +7,13 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.main;
+package com.avalond.ad_blocak.main;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-
+import com.avalond.ad_blocak.main.DNSFragment;
+import com.avalond.ad_blocak.main.HostsFragment;
 import java.util.ArrayList;
 
 /**
@@ -25,7 +26,7 @@ public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
     public MainFragmentPagerAdapter(FragmentManager fm) {
         super(fm);
-        fragments.add(new StartFragment());
+        fragments.add(new org.jak_linux.dns66.main.StartFragment());
         fragments.add(new HostsFragment());
         fragments.add(new DNSFragment());
     }

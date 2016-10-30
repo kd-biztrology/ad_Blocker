@@ -7,16 +7,14 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.main;
+package com.avalond.ad_blocak.main;
 
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
-
+import java.util.Collections;
 import org.jak_linux.dns66.FileHelper;
 import org.jak_linux.dns66.MainActivity;
-
-import java.util.Collections;
 
 /**
  * Simple ItemTouchHelper callback for a collection based adapter.

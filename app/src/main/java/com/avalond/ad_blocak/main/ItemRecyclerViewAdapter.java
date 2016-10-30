@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.main;
+package com.avalond.ad_blocak.main;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;

@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.main;
+package com.avalond.ad_blocak.main;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -20,47 +20,48 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-
 import org.jak_linux.dns66.Configuration;
 import org.jak_linux.dns66.FileHelper;
 import org.jak_linux.dns66.ItemChangedListener;
 import org.jak_linux.dns66.MainActivity;
 import org.jak_linux.dns66.R;
 
-public class HostsFragment extends Fragment {
+public class DNSFragment extends Fragment {
 
-    public HostsFragment() {
+    public DNSFragment() {
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hosts, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_dns, container, false);
 
-        RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.host_entries);
+        RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.dns_entries);
 
+        // use this setting to improve performance if you know that changes
+        // in content do not change the layout size of the RecyclerView
         mRecyclerView.setHasFixedSize(true);
 
+        // use a linear layout manager
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-
-        final ItemRecyclerViewAdapter mAdapter = new ItemRecyclerViewAdapter(MainActivity.config.hosts.items);
+        final org.jak_linux.dns66.main.ItemRecyclerViewAdapter mAdapter = new org.jak_linux.dns66.main.ItemRecyclerViewAdapter(MainActivity.config.dnsServers.items);
         mRecyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
         itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.host_add);
+        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.dns_add);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final MainActivity main = (MainActivity) getActivity();
+                MainActivity main = (MainActivity) getActivity();
                 main.editItem(null, new ItemChangedListener() {
                     @Override
                     public void onItemChanged(Configuration.Item item) {
-                        MainActivity.config.hosts.items.add(item);
+                        MainActivity.config.dnsServers.items.add(item);
                         mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
                         FileHelper.writeSettings(getContext(), MainActivity.config);
                     }
@@ -68,17 +69,15 @@ public class HostsFragment extends Fragment {
             }
         });
 
-        Switch hostEnabled = (Switch) rootView.findViewById(R.id.host_enabled);
-        hostEnabled.setChecked(MainActivity.config.hosts.enabled);
-        hostEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        Switch dnsEnabled = (Switch) rootView.findViewById(R.id.dns_enabled);
+        dnsEnabled.setChecked(MainActivity.config.dnsServers.enabled);
+        dnsEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MainActivity.config.hosts.enabled = isChecked;
+                MainActivity.config.dnsServers.enabled = isChecked;
                 FileHelper.writeSettings(getContext(), MainActivity.config);
             }
         });
-
         return rootView;
     }
-
 }
