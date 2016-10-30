@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66;
+package com.avalond.ad_blocak;
 
 import android.app.DownloadManager;
 import android.content.BroadcastReceiver;
@@ -27,17 +27,15 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationAdapter;
+import com.avalond.ad_blocak.main.MainFragmentPagerAdapter;
+import com.avalond.ad_blocak.vpn.AdVpnService;
 import com.stephentuso.welcome.WelcomeHelper;
-
-import org.jak_linux.dns66.main.MainFragmentPagerAdapter;
-import org.jak_linux.dns66.vpn.AdVpnService;
-
 import java.io.File;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+
 
 public class MainActivity extends AppCompatActivity {
     private static final int REQUEST_FILE_OPEN = 1;

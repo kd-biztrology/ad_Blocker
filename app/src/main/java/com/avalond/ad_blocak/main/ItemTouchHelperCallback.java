@@ -12,9 +12,10 @@ package com.avalond.ad_blocak.main;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.MainActivity;
 import java.util.Collections;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.MainActivity;
+
 
 /**
  * Simple ItemTouchHelper callback for a collection based adapter.

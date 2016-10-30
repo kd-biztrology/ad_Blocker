@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.vpn;
+package com.avalond.ad_blocak.vpn;
 
 
 import android.app.PendingIntent;
@@ -23,6 +23,9 @@ import android.system.Os;
 import android.system.OsConstants;
 import android.system.StructPollfd;
 import android.util.Log;
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.MainActivity;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -43,9 +46,6 @@ import java.util.LinkedList;
 import java.util.Locale;
 import java.util.Queue;
 import java.util.Set;
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.MainActivity;
 import org.pcap4j.packet.IpV4Packet;
 import org.pcap4j.packet.UdpPacket;
 import org.pcap4j.packet.UnknownPacket;
@@ -123,7 +123,8 @@ class AdVpnThread implements Runnable {
         Log.i(TAG, "Stopping Vpn Thread");
         if (thread != null) thread.interrupt();
 
-        mInterruptFd = FileHelper.closeOrWarn(mInterruptFd, TAG, "stopThread: Could not close interruptFd");
+        mInterruptFd = FileHelper
+            .closeOrWarn(mInterruptFd, TAG, "stopThread: Could not close interruptFd");
         try {
             if (thread != null) thread.join(2000);
         } catch (InterruptedException e) {

@@ -20,64 +20,70 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.ItemChangedListener;
-import org.jak_linux.dns66.MainActivity;
-import org.jak_linux.dns66.R;
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.ItemChangedListener;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+
 
 public class HostsFragment extends Fragment {
 
-    public HostsFragment() {
-    }
+  public HostsFragment() {
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_hosts, container, false);
+  }
 
-        RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.host_entries);
+  @Override
+  public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 
-        mRecyclerView.setHasFixedSize(true);
+    View rootView = inflater.inflate(R.layout.fragment_hosts,container,false);
 
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
+    RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.host_entries);
 
+    mRecyclerView.setHasFixedSize(true);
 
-        final org.jak_linux.dns66.main.ItemRecyclerViewAdapter mAdapter = new org.jak_linux.dns66.main.ItemRecyclerViewAdapter(MainActivity.config.hosts.items);
-        mRecyclerView.setAdapter(mAdapter);
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+    mRecyclerView.setLayoutManager(mLayoutManager);
 
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.host_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final MainActivity main = (MainActivity) getActivity();
-                main.editItem(null, new ItemChangedListener() {
-                    @Override
-                    public void onItemChanged(Configuration.Item item) {
-                        MainActivity.config.hosts.items.add(item);
-                        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
-                        FileHelper.writeSettings(getContext(), MainActivity.config);
-                    }
-                });
-            }
+    final ItemRecyclerViewAdapter mAdapter =
+        new ItemRecyclerViewAdapter(MainActivity.config.hosts.items);
+    mRecyclerView.setAdapter(mAdapter);
+
+    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
+    itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+
+    FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.host_add);
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+
+        final MainActivity main = (MainActivity) getActivity();
+        main.editItem(null,new ItemChangedListener() {
+          @Override
+          public void onItemChanged(Configuration.Item item) {
+
+            MainActivity.config.hosts.items.add(item);
+            mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
+            FileHelper.writeSettings(getContext(),MainActivity.config);
+          }
         });
+      }
+    });
 
-        Switch hostEnabled = (Switch) rootView.findViewById(R.id.host_enabled);
-        hostEnabled.setChecked(MainActivity.config.hosts.enabled);
-        hostEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MainActivity.config.hosts.enabled = isChecked;
-                FileHelper.writeSettings(getContext(), MainActivity.config);
-            }
-        });
+    Switch hostEnabled = (Switch) rootView.findViewById(R.id.host_enabled);
+    hostEnabled.setChecked(MainActivity.config.hosts.enabled);
+    hostEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
 
-        return rootView;
-    }
+        MainActivity.config.hosts.enabled = isChecked;
+        FileHelper.writeSettings(getContext(),MainActivity.config);
+      }
+    });
+
+    return rootView;
+  }
 
 }

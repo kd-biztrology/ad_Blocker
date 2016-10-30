@@ -16,14 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.ItemChangedListener;
-import org.jak_linux.dns66.MainActivity;
-import org.jak_linux.dns66.R;
-
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.ItemChangedListener;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
 import java.util.List;
+
+
 
 public class ItemRecyclerViewAdapter extends RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder> {
     public final List<Configuration.Item> items;

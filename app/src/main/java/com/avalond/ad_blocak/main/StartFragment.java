@@ -24,14 +24,12 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.MainActivity;
-import org.jak_linux.dns66.R;
-import org.jak_linux.dns66.vpn.AdVpnService;
-import org.jak_linux.dns66.vpn.Command;
-
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+import com.avalond.ad_blocak.vpn.AdVpnService;
+import com.avalond.ad_blocak.vpn.Command;
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
@@ -61,7 +59,7 @@ public class StartFragment extends Fragment {
                     Log.i(TAG, "Attempting to disconnect");
 
                     Intent intent = new Intent(getActivity(), AdVpnService.class);
-                    intent.putExtra("COMMAND", org.jak_linux.dns66.vpn.Command.STOP.ordinal());
+                    intent.putExtra("COMMAND", Command.STOP.ordinal());
                     getActivity().startService(intent);
                 } else {
                     checkHostsFilesAndStartService();

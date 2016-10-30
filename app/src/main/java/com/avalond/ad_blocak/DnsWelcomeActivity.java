@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66;
+package com.avalond.ad_blocak;
 
 import com.stephentuso.welcome.BasicPage;
 import com.stephentuso.welcome.TitlePage;

@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66.vpn;
+package com.avalond.ad_blocak.vpn;
 
 import android.app.Notification;
 import android.app.PendingIntent;
@@ -24,11 +24,11 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
 
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.MainActivity;
-import org.jak_linux.dns66.R;
 
 public class AdVpnService extends VpnService implements Handler.Callback {
     public static final int VPN_STATUS_STARTING = 0;
@@ -107,7 +107,8 @@ public class AdVpnService extends VpnService implements Handler.Callback {
     @Override
     public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
         Log.i(TAG, "onStartCommand");
-        switch (intent == null ? Command.START : Command.values()[intent.getIntExtra("COMMAND", Command.START.ordinal())]) {
+        switch (intent == null ? Command.START : Command
+            .values()[intent.getIntExtra("COMMAND", Command.START.ordinal())]) {
             case START:
                 startVpn(intent == null ? null : (PendingIntent) intent.getParcelableExtra("NOTIFICATION_INTENT"));
                 break;

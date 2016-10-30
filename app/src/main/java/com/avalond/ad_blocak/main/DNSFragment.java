@@ -20,11 +20,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import org.jak_linux.dns66.Configuration;
-import org.jak_linux.dns66.FileHelper;
-import org.jak_linux.dns66.ItemChangedListener;
-import org.jak_linux.dns66.MainActivity;
-import org.jak_linux.dns66.R;
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.ItemChangedListener;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+
 
 public class DNSFragment extends Fragment {
 
@@ -46,7 +47,8 @@ public class DNSFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(mLayoutManager);
 
-        final org.jak_linux.dns66.main.ItemRecyclerViewAdapter mAdapter = new org.jak_linux.dns66.main.ItemRecyclerViewAdapter(MainActivity.config.dnsServers.items);
+        final ItemRecyclerViewAdapter mAdapter = new ItemRecyclerViewAdapter(
+            MainActivity.config.dnsServers.items);
         mRecyclerView.setAdapter(mAdapter);
 
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));

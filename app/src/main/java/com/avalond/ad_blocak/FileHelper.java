@@ -7,7 +7,7 @@
  * Copyright (C) 2016 Julian Andres Klode <jak@jak-linux.org>
  * Copyright (C) 2016 avalond <agonyice0115@gmail.com>
  */
-package org.jak_linux.dns66;
+package com.avalond.ad_blocak;
 
 import android.content.Context;
 import android.system.ErrnoException;
@@ -18,7 +18,6 @@ import android.util.JsonReader;
 import android.util.JsonWriter;
 import android.util.Log;
 import android.widget.Toast;
-
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileDescriptor;
