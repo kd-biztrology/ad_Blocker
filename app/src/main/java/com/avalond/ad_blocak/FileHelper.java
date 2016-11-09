@@ -139,7 +139,9 @@ public final class FileHelper {
    */
   public static File getItemFile(Context context,Configuration.Item item) {
 
-    if (!item.location.contains("/")) return null;
+    if (!item.location.contains("/")) {
+      return null;
+    }
 
     try {
       return new File(context.getExternalFilesDir(null),
@@ -164,11 +166,15 @@ public final class FileHelper {
       throws ErrnoException, InterruptedException {
 
     while (true) {
-      if (Thread.interrupted()) throw new InterruptedException();
+      if (Thread.interrupted()) {
+        throw new InterruptedException();
+      }
       try {
         return Os.poll(fds,timeout);
       } catch (ErrnoException e) {
-        if (e.errno == OsConstants.EINTR) continue;
+        if (e.errno == OsConstants.EINTR) {
+          continue;
+        }
         throw e;
       }
     }
@@ -177,7 +183,9 @@ public final class FileHelper {
   public static FileDescriptor closeOrWarn(FileDescriptor fd,String tag,String message) {
 
     try {
-      if (fd != null) Os.close(fd);
+      if (fd != null) {
+        Os.close(fd);
+      }
     } catch (ErrnoException e) {
       Log.e(tag,"closeOrWarn: " + message,e);
     } finally {
@@ -188,7 +196,9 @@ public final class FileHelper {
   public static <T extends Closeable> T closeOrWarn(T fd,String tag,String message) {
 
     try {
-      if (fd != null) fd.close();
+      if (fd != null) {
+        fd.close();
+      }
     } catch (Exception e) {
       Log.e(tag,"closeOrWarn: " + message,e);
     } finally {

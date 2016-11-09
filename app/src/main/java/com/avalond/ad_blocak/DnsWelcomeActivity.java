@@ -23,16 +23,18 @@ public class DnsWelcomeActivity extends WelcomeActivity {
   @Override
   protected WelcomeConfiguration configuration() {
 
-    return new WelcomeConfiguration.Builder(this).defaultBackgroundColor(R.color.colorPrimaryDark)
-        .page(new TitlePage(R.mipmap.app_icon_large,getString(R.string.welcome_title))).page(
-            new BasicPage(R.drawable.ic_menu_start_white,getString(R.string.welcome_title_start),
-                getString(R.string.welcome_message_start))
-                .background(R.color.colorPrimaryDarkFriend1)).page(
-            new BasicPage(R.drawable.ic_menu_hosts_white,getString(R.string.welcome_title_hosts),
-                getString(R.string.welcome_message_hosts))
-                .background(R.color.colorPrimaryDarkFriend2)).page(
-            new BasicPage(R.drawable.ic_menu_dns_white,getString(R.string.welcome_title_dns),
-                getString(R.string.welcome_message_dns))
-                .background(R.color.colorPrimaryDarkFriend3)).build();
+    return new WelcomeConfiguration.Builder(this)
+        .defaultBackgroundColor(R.color.colorPrimaryDark)
+        .page(new TitlePage(R.mipmap.app_icon_large,getString(R.string.welcome_title)))
+        .page(new BasicPage(R.drawable.ic_menu_start_white,getString(R.string.welcome_title_start),
+            getString(R.string.welcome_message_start))
+            .background(R.color.colorPrimaryDarkFriend1))
+        .page(new BasicPage(R.drawable.ic_menu_hosts_white,getString(R.string.welcome_title_hosts),
+            getString(R.string.welcome_message_hosts))
+            .background(R.color.colorPrimaryDarkFriend2))
+        .page(new BasicPage(R.drawable.ic_menu_dns_white,getString(R.string.welcome_title_dns),
+            getString(R.string.welcome_message_dns))
+            .background(R.color.colorPrimaryDarkFriend3))
+        .build();
   }
 }

@@ -15,12 +15,14 @@ import android.widget.TextView;
 
 public class InfoActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+  @Override
+  protected void onCreate(Bundle savedInstanceState) {
 
-        setContentView(R.layout.activity_info);
+    super.onCreate(savedInstanceState);
 
-        ((TextView) findViewById(R.id.app_version_info)).setText(getString(R.string.app_version_info, BuildConfig.VERSION_NAME));
-    }
+    setContentView(R.layout.activity_info);
+
+    ((TextView) findViewById(R.id.app_version_info))
+        .setText(getString(R.string.app_version_info,BuildConfig.VERSION_NAME));
+  }
 }
