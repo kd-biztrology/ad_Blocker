@@ -9,15 +9,6 @@
  */
 package com.avalond.ad_blocak;
 
-import android.content.Context;
-import android.system.ErrnoException;
-import android.system.Os;
-import android.system.OsConstants;
-import android.system.StructPollfd;
-import android.util.JsonReader;
-import android.util.JsonWriter;
-import android.util.Log;
-import android.widget.Toast;
 import java.io.Closeable;
 import java.io.File;
 import java.io.FileDescriptor;
@@ -29,6 +20,16 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 
+import android.content.Context;
+import android.system.ErrnoException;
+import android.system.Os;
+import android.system.OsConstants;
+import android.system.StructPollfd;
+import android.util.JsonReader;
+import android.util.JsonWriter;
+import android.util.Log;
+import android.widget.Toast;
+
 /**
  * Utility class for working with files.
  */
@@ -39,7 +40,7 @@ public final class FileHelper {
    * Try open the file with {@link Context#openFileInput(String)}, falling back to a file of
    * the same name in the assets.
    */
-  public static InputStream openRead(Context context,String filename) throws IOException {
+  public static InputStream openRead(Context context, String filename) throws IOException {
 
     try {
       return context.openFileInput(filename);
@@ -48,96 +49,105 @@ public final class FileHelper {
     }
   }
 
+
   /**
    * Write to the given file in the private files dir, first renaming an old one to .bak
    *
-   * @param context  A context
-   * @param filename A filename as for @{link {@link Context#openFileOutput(String,int)}}
-   * @return See @{link {@link Context#openFileOutput(String,int)}}
-   * @throws IOException See @{link {@link Context#openFileOutput(String,int)}}
+   * @param context A context
+   * @param filename A filename as for @{link {@link Context#openFileOutput(String, int)}}
+   * @return See @{link {@link Context#openFileOutput(String, int)}}
+   * @throws IOException See @{link {@link Context#openFileOutput(String, int)}}
    */
-  public static OutputStream openWrite(Context context,String filename) throws IOException {
+  public static OutputStream openWrite(Context context, String filename) throws IOException {
 
     File out = context.getFileStreamPath(filename);
 
     // Create backup
     out.renameTo(context.getFileStreamPath(filename + ".bak"));
 
-    return context.openFileOutput(filename,Context.MODE_PRIVATE);
+    return context.openFileOutput(filename, Context.MODE_PRIVATE);
   }
 
-  private static Configuration readConfigFile(Context context,String name,boolean defaultsOnly)
+
+  private static Configuration readConfigFile(Context context, String name, boolean defaultsOnly)
       throws IOException {
 
     InputStream stream;
     if (defaultsOnly) {
       stream = context.getAssets().open(name);
     } else {
-      stream = FileHelper.openRead(context,name);
+      stream = FileHelper.openRead(context, name);
     }
     Configuration config = new Configuration();
     config.read(new JsonReader(new InputStreamReader(stream)));
     return config;
   }
 
+
   public static Configuration loadCurrentSettings(Context context) {
 
     try {
-      return readConfigFile(context,"settings.json",false);
+      return readConfigFile(context, "settings.json", false);
     } catch (Exception e) {
-      Toast.makeText(context,context.getString(R.string.cannot_read_config,e.getLocalizedMessage()),
+      Toast.makeText(context,
+          context.getString(R.string.cannot_read_config, e.getLocalizedMessage()),
           Toast.LENGTH_LONG).show();
       return loadPreviousSettings(context);
     }
   }
 
+
   public static Configuration loadPreviousSettings(Context context) {
 
     try {
-      return readConfigFile(context,"settings.json.bak",false);
+      return readConfigFile(context, "settings.json.bak", false);
     } catch (Exception e) {
       Toast.makeText(context,
-          context.getString(R.string.cannot_restore_previous_config,e.getLocalizedMessage()),
+          context.getString(R.string.cannot_restore_previous_config, e.getLocalizedMessage()),
           Toast.LENGTH_LONG).show();
       return loadDefaultSettings(context);
     }
   }
 
+
   public static Configuration loadDefaultSettings(Context context) {
 
     try {
-      return readConfigFile(context,"settings.json",true);
+      return readConfigFile(context, "settings.json", true);
     } catch (Exception e) {
       Toast.makeText(context,
-          context.getString(R.string.cannot_load_default_config,e.getLocalizedMessage()),
+          context.getString(R.string.cannot_load_default_config, e.getLocalizedMessage()),
           Toast.LENGTH_LONG).show();
       return null;
     }
   }
 
-  public static void writeSettings(Context context,Configuration config) {
 
-    Log.d("FileHelper","writeSettings: Writing the settings file");
+  public static void writeSettings(Context context, Configuration config) {
+
+    Log.d("FileHelper", "writeSettings: Writing the settings file");
     try {
       JsonWriter writer =
-          new JsonWriter(new OutputStreamWriter(FileHelper.openWrite(context,"settings.json")));
+          new JsonWriter(new OutputStreamWriter(FileHelper.openWrite(context, "settings.json")));
       config.write(writer);
       writer.close();
     } catch (IOException e) {
       Toast
-          .makeText(context,context.getString(R.string.cannot_write_config,e.getLocalizedMessage()),
+          .makeText(context,
+              context.getString(R.string.cannot_write_config, e.getLocalizedMessage()),
               Toast.LENGTH_SHORT).show();
     }
   }
+
 
   /**
    * Returns a file where the item should be downloaded to.
    *
    * @param context A context to work in
-   * @param item    A configuration item.
+   * @param item A configuration item.
    * @return File or null, if that item is not downloadable.
    */
-  public static File getItemFile(Context context,Configuration.Item item) {
+  public static File getItemFile(Context context, Configuration.Item item) {
 
     if (!item.location.contains("/")) {
       return null;
@@ -145,24 +155,25 @@ public final class FileHelper {
 
     try {
       return new File(context.getExternalFilesDir(null),
-          java.net.URLEncoder.encode(item.location,"UTF-8"));
+          java.net.URLEncoder.encode(item.location, "UTF-8"));
     } catch (UnsupportedEncodingException e) {
       e.printStackTrace();
       return null;
     }
   }
 
+
   /**
-   * Wrapper around {@link Os#poll(StructPollfd[],int)} that automatically restarts on EINTR
+   * Wrapper around {@link Os#poll(StructPollfd[], int)} that automatically restarts on EINTR
    * While post-Lollipop devices handle that themselves, we need to do this for Lollipop.
    *
-   * @param fds     Descriptors and events to wait on
+   * @param fds Descriptors and events to wait on
    * @param timeout Timeout. Should be -1 for infinite, as we do not lower the timeout when
-   *                retrying due to an interrupt
+   * retrying due to an interrupt
    * @return The number of fds that have events
-   * @throws ErrnoException See {@link Os#poll(StructPollfd[],int)}
+   * @throws ErrnoException See {@link Os#poll(StructPollfd[], int)}
    */
-  public static int poll(StructPollfd[] fds,int timeout)
+  public static int poll(StructPollfd[] fds, int timeout)
       throws ErrnoException, InterruptedException {
 
     while (true) {
@@ -170,7 +181,7 @@ public final class FileHelper {
         throw new InterruptedException();
       }
       try {
-        return Os.poll(fds,timeout);
+        return Os.poll(fds, timeout);
       } catch (ErrnoException e) {
         if (e.errno == OsConstants.EINTR) {
           continue;
@@ -180,27 +191,29 @@ public final class FileHelper {
     }
   }
 
-  public static FileDescriptor closeOrWarn(FileDescriptor fd,String tag,String message) {
+
+  public static FileDescriptor closeOrWarn(FileDescriptor fd, String tag, String message) {
 
     try {
       if (fd != null) {
         Os.close(fd);
       }
     } catch (ErrnoException e) {
-      Log.e(tag,"closeOrWarn: " + message,e);
+      Log.e(tag, "closeOrWarn: " + message, e);
     } finally {
       return null;
     }
   }
 
-  public static <T extends Closeable> T closeOrWarn(T fd,String tag,String message) {
+
+  public static <T extends Closeable> T closeOrWarn(T fd, String tag, String message) {
 
     try {
       if (fd != null) {
         fd.close();
       }
     } catch (Exception e) {
-      Log.e(tag,"closeOrWarn: " + message,e);
+      Log.e(tag, "closeOrWarn: " + message, e);
     } finally {
       return null;
     }

@@ -9,24 +9,24 @@
     tools:context="org.jak_linux.dns66.main.StartFragment">
 
     <ImageView
+        android:id="@+id/start_button"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:id="@+id/start_button"
-        app:srcCompat="@drawable/ic_menu_start" />
+        app:srcCompat="@drawable/ic_menu_start"/>
 
     <TextView
         android:id="@+id/state_textview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/notification_stopped"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/start_description"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <Switch
         android:id="@+id/switch_onboot"
@@ -39,6 +39,6 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:saveEnabled="false"
-        android:text="@string/switch_onboot" />
+        android:text="@string/switch_onboot"/>
 
 </LinearLayout>

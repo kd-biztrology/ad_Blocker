@@ -15,8 +15,8 @@ import android.content.Intent;
 
 public class BootComplete extends BroadcastReceiver {
 
-    @Override
-    public void onReceive(Context context, Intent intent) {
-        AdVpnService.checkStartVpnOnBoot(context);
-    }
+  @Override
+  public void onReceive(Context context, Intent intent) {
+    AdVpnService.checkStartVpnOnBoot(context);
+  }
 }

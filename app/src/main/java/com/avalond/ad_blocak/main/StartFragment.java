@@ -24,6 +24,7 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
+
 import com.avalond.ad_blocak.Configuration;
 import com.avalond.ad_blocak.FileHelper;
 import com.avalond.ad_blocak.MainActivity;
@@ -35,115 +36,123 @@ import java.io.File;
 import static android.app.Activity.RESULT_OK;
 
 public class StartFragment extends Fragment {
-    public static final int REQUEST_START_VPN = 1;
-    private static final String TAG = "StartFragment";
+  public static final int REQUEST_START_VPN = 1;
+  private static final String TAG = "StartFragment";
 
-    public StartFragment() {
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_start, container, false);
-        Switch switchOnBoot = (Switch) rootView.findViewById(R.id.switch_onboot);
+  public StartFragment() {
+  }
 
-        ImageView view = (ImageView) rootView.findViewById(R.id.start_button);
 
-        TextView stateText = (TextView) rootView.findViewById(R.id.state_textview);
-        stateText.setText(getString(AdVpnService.vpnStatusToTextId(AdVpnService.vpnStatus)));
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+    View rootView = inflater.inflate(R.layout.fragment_start, container, false);
+    Switch switchOnBoot = (Switch) rootView.findViewById(R.id.switch_onboot);
 
-        view.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View v) {
-                if (AdVpnService.vpnStatus != AdVpnService.VPN_STATUS_STOPPED) {
-                    Log.i(TAG, "Attempting to disconnect");
+    ImageView view = (ImageView) rootView.findViewById(R.id.start_button);
 
-                    Intent intent = new Intent(getActivity(), AdVpnService.class);
-                    intent.putExtra("COMMAND", Command.STOP.ordinal());
-                    getActivity().startService(intent);
-                } else {
-                    checkHostsFilesAndStartService();
-                }
-                return true;
-            }
-        });
+    TextView stateText = (TextView) rootView.findViewById(R.id.state_textview);
+    stateText.setText(getString(AdVpnService.vpnStatusToTextId(AdVpnService.vpnStatus)));
 
-        switchOnBoot.setChecked(MainActivity.config.autoStart);
-        switchOnBoot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MainActivity.config.autoStart = isChecked;
-                FileHelper.writeSettings(getContext(), MainActivity.config);
-            }
-        });
+    view.setOnLongClickListener(new View.OnLongClickListener() {
+      @Override
+      public boolean onLongClick(View v) {
+        if (AdVpnService.vpnStatus != AdVpnService.VPN_STATUS_STOPPED) {
+          Log.i(TAG, "Attempting to disconnect");
 
-        return rootView;
-    }
-
-    private void checkHostsFilesAndStartService() {
-        if (!areHostsFilesExistant()) {
-            new AlertDialog.Builder(getActivity())
-                    .setIcon(R.drawable.ic_warning)
-                    .setTitle(R.string.missing_hosts_files_title)
-                    .setMessage(R.string.missing_hosts_files_message)
-                    .setNegativeButton(R.string.button_no, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            /* Do nothing */
-                        }
-                    })
-                    .setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            startService();
-                        }
-                    })
-                    .show();
-            return;
-        }
-        startService();
-    }
-
-    private void startService() {
-        Log.i(TAG, "Attempting to connect");
-        Intent intent = VpnService.prepare(getContext());
-        if (intent != null) {
-            startActivityForResult(intent, REQUEST_START_VPN);
+          Intent intent = new Intent(getActivity(), AdVpnService.class);
+          intent.putExtra("COMMAND", Command.STOP.ordinal());
+          getActivity().startService(intent);
         } else {
-            onActivityResult(REQUEST_START_VPN, RESULT_OK, null);
-        }
-    }
-
-    /**
-     * Check if all configured hosts files exist.
-     *
-     * @return true if all host files exist or no host files were configured.
-     */
-    private boolean areHostsFilesExistant() {
-        if (!MainActivity.config.hosts.enabled)
-            return true;
-        for (Configuration.Item item : MainActivity.config.hosts.items) {
-            File file = FileHelper.getItemFile(getContext(), item);
-            if (item.state != Configuration.Item.STATE_IGNORE && file != null) {
-                if (!file.exists())
-                    return false;
-            }
+          checkHostsFilesAndStartService();
         }
         return true;
-    }
+      }
+    });
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        Log.d(TAG, "onActivityResult: Received result=" + resultCode + " for request=" + requestCode);
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == REQUEST_START_VPN && resultCode == RESULT_OK) {
-            Log.d("MainActivity", "onActivityResult: Starting service");
-            Intent intent = new Intent(getContext(), AdVpnService.class);
-            intent.putExtra("COMMAND", Command.START.ordinal());
-            intent.putExtra("NOTIFICATION_INTENT",
-                    PendingIntent.getActivity(getContext(), 0,
-                            new Intent(getContext(), MainActivity.class), 0));
-            getContext().startService(intent);
-        }
+    switchOnBoot.setChecked(MainActivity.config.autoStart);
+    switchOnBoot.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        MainActivity.config.autoStart = isChecked;
+        FileHelper.writeSettings(getContext(), MainActivity.config);
+      }
+    });
+
+    return rootView;
+  }
+
+
+  private void checkHostsFilesAndStartService() {
+    if (!areHostsFilesExistant()) {
+      new AlertDialog.Builder(getActivity())
+          .setIcon(R.drawable.ic_warning)
+          .setTitle(R.string.missing_hosts_files_title)
+          .setMessage(R.string.missing_hosts_files_message)
+          .setNegativeButton(R.string.button_no, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                            /* Do nothing */
+            }
+          })
+          .setPositiveButton(R.string.button_yes, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+              startService();
+            }
+          })
+          .show();
+      return;
     }
+    startService();
+  }
+
+
+  private void startService() {
+    Log.i(TAG, "Attempting to connect");
+    Intent intent = VpnService.prepare(getContext());
+    if (intent != null) {
+      startActivityForResult(intent, REQUEST_START_VPN);
+    } else {
+      onActivityResult(REQUEST_START_VPN, RESULT_OK, null);
+    }
+  }
+
+
+  /**
+   * Check if all configured hosts files exist.
+   *
+   * @return true if all host files exist or no host files were configured.
+   */
+  private boolean areHostsFilesExistant() {
+    if (!MainActivity.config.hosts.enabled) {
+      return true;
+    }
+    for (Configuration.Item item : MainActivity.config.hosts.items) {
+      File file = FileHelper.getItemFile(getContext(), item);
+      if (item.state != Configuration.Item.STATE_IGNORE && file != null) {
+        if (!file.exists()) {
+          return false;
+        }
+      }
+    }
+    return true;
+  }
+
+
+  @Override
+  public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    Log.d(TAG, "onActivityResult: Received result=" + resultCode + " for request=" + requestCode);
+    super.onActivityResult(requestCode, resultCode, data);
+    if (requestCode == REQUEST_START_VPN && resultCode == RESULT_OK) {
+      Log.d("MainActivity", "onActivityResult: Starting service");
+      Intent intent = new Intent(getContext(), AdVpnService.class);
+      intent.putExtra("COMMAND", Command.START.ordinal());
+      intent.putExtra("NOTIFICATION_INTENT",
+          PendingIntent.getActivity(getContext(), 0,
+              new Intent(getContext(), MainActivity.class), 0));
+      getContext().startService(intent);
+    }
+  }
 }

@@ -19,7 +19,7 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:saveEnabled="false"
-        android:text="@string/custom_dns" />
+        android:text="@string/custom_dns"/>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/dns_add"
@@ -30,12 +30,12 @@
         android:layout_margin="@dimen/fab_margin"
         android:clickable="true"
         app:fabSize="auto"
-        app:srcCompat="@drawable/ic_add" />
+        app:srcCompat="@drawable/ic_add"/>
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/dns_entries"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/dns_enabled"
-        android:scrollbars="vertical" />
+        android:scrollbars="vertical"/>
 </RelativeLayout>

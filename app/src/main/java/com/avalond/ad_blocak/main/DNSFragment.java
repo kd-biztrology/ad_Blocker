@@ -9,6 +9,12 @@
  */
 package com.avalond.ad_blocak.main;
 
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.ItemChangedListener;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,66 +26,60 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import com.avalond.ad_blocak.Configuration;
-import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.ItemChangedListener;
-import com.avalond.ad_blocak.MainActivity;
-import com.avalond.ad_blocak.R;
-
 
 public class DNSFragment extends Fragment {
 
-    public DNSFragment() {
-    }
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_dns, container, false);
-
-        RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.dns_entries);
-
-        // use this setting to improve performance if you know that changes
-        // in content do not change the layout size of the RecyclerView
-        mRecyclerView.setHasFixedSize(true);
-
-        // use a linear layout manager
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(mLayoutManager);
-
-        final ItemRecyclerViewAdapter mAdapter = new ItemRecyclerViewAdapter(
-            MainActivity.config.dnsServers.items);
-        mRecyclerView.setAdapter(mAdapter);
-
-        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
-        itemTouchHelper.attachToRecyclerView(mRecyclerView);
+  public DNSFragment() {
+  }
 
 
-        FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.dns_add);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MainActivity main = (MainActivity) getActivity();
-                main.editItem(null, new ItemChangedListener() {
-                    @Override
-                    public void onItemChanged(Configuration.Item item) {
-                        MainActivity.config.dnsServers.items.add(item);
-                        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
-                        FileHelper.writeSettings(getContext(), MainActivity.config);
-                    }
-                });
-            }
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                           Bundle savedInstanceState) {
+    View rootView = inflater.inflate(R.layout.fragment_dns, container, false);
+
+    RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.dns_entries);
+
+    // use this setting to improve performance if you know that changes
+    // in content do not change the layout size of the RecyclerView
+    mRecyclerView.setHasFixedSize(true);
+
+    // use a linear layout manager
+    RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
+    mRecyclerView.setLayoutManager(mLayoutManager);
+
+    final ItemRecyclerViewAdapter mAdapter = new ItemRecyclerViewAdapter(
+        MainActivity.config.dnsServers.items);
+    mRecyclerView.setAdapter(mAdapter);
+
+    ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
+    itemTouchHelper.attachToRecyclerView(mRecyclerView);
+
+    FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.dns_add);
+    fab.setOnClickListener(new View.OnClickListener() {
+      @Override
+      public void onClick(View view) {
+        MainActivity main = (MainActivity) getActivity();
+        main.editItem(null, new ItemChangedListener() {
+          @Override
+          public void onItemChanged(Configuration.Item item) {
+            MainActivity.config.dnsServers.items.add(item);
+            mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
+            FileHelper.writeSettings(getContext(), MainActivity.config);
+          }
         });
+      }
+    });
 
-        Switch dnsEnabled = (Switch) rootView.findViewById(R.id.dns_enabled);
-        dnsEnabled.setChecked(MainActivity.config.dnsServers.enabled);
-        dnsEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                MainActivity.config.dnsServers.enabled = isChecked;
-                FileHelper.writeSettings(getContext(), MainActivity.config);
-            }
-        });
-        return rootView;
-    }
+    Switch dnsEnabled = (Switch) rootView.findViewById(R.id.dns_enabled);
+    dnsEnabled.setChecked(MainActivity.config.dnsServers.enabled);
+    dnsEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        MainActivity.config.dnsServers.enabled = isChecked;
+        FileHelper.writeSettings(getContext(), MainActivity.config);
+      }
+    });
+    return rootView;
+  }
 }

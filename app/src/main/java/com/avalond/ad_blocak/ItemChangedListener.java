@@ -15,5 +15,5 @@ package com.avalond.ad_blocak;
  * returned by the ItemActivity.
  */
 public interface ItemChangedListener {
-    void onItemChanged(Configuration.Item item);
+  void onItemChanged(Configuration.Item item);
 }

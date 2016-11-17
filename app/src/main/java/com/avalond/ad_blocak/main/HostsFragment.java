@@ -9,6 +9,12 @@
  */
 package com.avalond.ad_blocak.main;
 
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.ItemChangedListener;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -20,12 +26,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.Switch;
-import com.avalond.ad_blocak.Configuration;
-import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.ItemChangedListener;
-import com.avalond.ad_blocak.MainActivity;
-import com.avalond.ad_blocak.R;
-
 
 public class HostsFragment extends Fragment {
 
@@ -33,10 +33,11 @@ public class HostsFragment extends Fragment {
 
   }
 
-  @Override
-  public View onCreateView(LayoutInflater inflater,ViewGroup container,Bundle savedInstanceState) {
 
-    View rootView = inflater.inflate(R.layout.fragment_hosts,container,false);
+  @Override
+  public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+
+    View rootView = inflater.inflate(R.layout.fragment_hosts, container, false);
 
     RecyclerView mRecyclerView = (RecyclerView) rootView.findViewById(R.id.host_entries);
 
@@ -45,7 +46,6 @@ public class HostsFragment extends Fragment {
     RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext());
     mRecyclerView.setLayoutManager(mLayoutManager);
 
-
     final ItemRecyclerViewAdapter mAdapter =
         new ItemRecyclerViewAdapter(MainActivity.config.hosts.items);
     mRecyclerView.setAdapter(mAdapter);
@@ -53,20 +53,19 @@ public class HostsFragment extends Fragment {
     ItemTouchHelper itemTouchHelper = new ItemTouchHelper(new ItemTouchHelperCallback(mAdapter));
     itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
-
     FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.host_add);
     fab.setOnClickListener(new View.OnClickListener() {
       @Override
       public void onClick(View view) {
 
         final MainActivity main = (MainActivity) getActivity();
-        main.editItem(null,new ItemChangedListener() {
+        main.editItem(null, new ItemChangedListener() {
           @Override
           public void onItemChanged(Configuration.Item item) {
 
             MainActivity.config.hosts.items.add(item);
             mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
-            FileHelper.writeSettings(getContext(),MainActivity.config);
+            FileHelper.writeSettings(getContext(), MainActivity.config);
           }
         });
       }
@@ -76,14 +75,13 @@ public class HostsFragment extends Fragment {
     hostEnabled.setChecked(MainActivity.config.hosts.enabled);
     hostEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
       @Override
-      public void onCheckedChanged(CompoundButton buttonView,boolean isChecked) {
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
         MainActivity.config.hosts.enabled = isChecked;
-        FileHelper.writeSettings(getContext(),MainActivity.config);
+        FileHelper.writeSettings(getContext(), MainActivity.config);
       }
     });
 
     return rootView;
   }
-
 }

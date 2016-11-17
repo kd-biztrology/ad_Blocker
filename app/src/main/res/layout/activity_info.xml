@@ -16,22 +16,20 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        app:srcCompat="@mipmap/app_icon_large" />
-
+        app:srcCompat="@mipmap/app_icon_large"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_shortdesc"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <TextView
         android:id="@+id/app_version_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/app_version_info"
-        android:textAlignment="center" />
-
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -40,20 +38,20 @@
         android:text="@string/website"
         android:paddingTop="20dp"
         android:paddingBottom="20dp"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/info_app_copyright"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="5dp"
         android:text="@string/translator_credits"
-        android:textAlignment="center" />
+        android:textAlignment="center"/>
 
     <TextView
         android:layout_width="match_parent"

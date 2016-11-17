@@ -23,6 +23,6 @@ public class InfoActivity extends AppCompatActivity {
     setContentView(R.layout.activity_info);
 
     ((TextView) findViewById(R.id.app_version_info))
-        .setText(getString(R.string.app_version_info,BuildConfig.VERSION_NAME));
+        .setText(getString(R.string.app_version_info, BuildConfig.VERSION_NAME));
   }
 }

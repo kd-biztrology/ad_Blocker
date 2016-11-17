@@ -9,12 +9,12 @@
  */
 package com.avalond.ad_blocak;
 
-import android.util.JsonReader;
-import android.util.JsonWriter;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
+import android.util.JsonReader;
+import android.util.JsonWriter;
 
 /**
  * Configuration class. This is serialized as JSON using read() and write() methods.
@@ -51,6 +51,7 @@ public class Configuration {
     return hosts;
   }
 
+
   private static DnsServers readDnsServers(JsonReader reader) throws IOException {
 
     DnsServers servers = new DnsServers();
@@ -73,6 +74,7 @@ public class Configuration {
     return servers;
   }
 
+
   private static List<Item> readItemList(JsonReader reader) throws IOException {
 
     reader.beginArray();
@@ -84,6 +86,7 @@ public class Configuration {
     reader.endArray();
     return list;
   }
+
 
   private static Item readItem(JsonReader reader) throws IOException {
 
@@ -110,34 +113,38 @@ public class Configuration {
     return item;
   }
 
-  private static void writeHosts(JsonWriter writer,Hosts h) throws IOException {
+
+  private static void writeHosts(JsonWriter writer, Hosts h) throws IOException {
 
     writer.beginObject();
     writer.name("enabled").value(h.enabled);
     writer.name("items");
-    writeItemList(writer,h.items);
+    writeItemList(writer, h.items);
     writer.endObject();
   }
 
-  private static void writeDnsServers(JsonWriter writer,DnsServers s) throws IOException {
+
+  private static void writeDnsServers(JsonWriter writer, DnsServers s) throws IOException {
 
     writer.beginObject();
     writer.name("enabled").value(s.enabled);
     writer.name("items");
-    writeItemList(writer,s.items);
+    writeItemList(writer, s.items);
     writer.endObject();
   }
 
-  private static void writeItemList(JsonWriter writer,List<Item> items) throws IOException {
+
+  private static void writeItemList(JsonWriter writer, List<Item> items) throws IOException {
 
     writer.beginArray();
     for (Item i : items) {
-      writeItem(writer,i);
+      writeItem(writer, i);
     }
     writer.endArray();
   }
 
-  private static void writeItem(JsonWriter writer,Item i) throws IOException {
+
+  private static void writeItem(JsonWriter writer, Item i) throws IOException {
 
     writer.beginObject();
     writer.name("title").value(i.title);
@@ -146,17 +153,19 @@ public class Configuration {
     writer.endObject();
   }
 
+
   public void write(JsonWriter writer) throws IOException {
 
     writer.beginObject();
     writer.name("version").value(VERSION);
     writer.name("autoStart").value(autoStart);
     writer.name("hosts");
-    writeHosts(writer,hosts);
+    writeHosts(writer, hosts);
     writer.name("dnsServers");
-    writeDnsServers(writer,dnsServers);
+    writeDnsServers(writer, dnsServers);
     writer.endObject();
   }
+
 
   public void read(JsonReader reader) throws IOException {
 
@@ -184,6 +193,7 @@ public class Configuration {
     }
     reader.endObject();
   }
+
 
   public static class Item {
 

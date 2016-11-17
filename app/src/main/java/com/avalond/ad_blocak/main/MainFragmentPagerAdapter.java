@@ -9,10 +9,11 @@
  */
 package com.avalond.ad_blocak.main;
 
+import java.util.ArrayList;
+
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
-import java.util.ArrayList;
 
 /**
  * Adapter for the pager that holds the fragments of the main activity.
@@ -20,23 +21,25 @@ import java.util.ArrayList;
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {
 
-    private final ArrayList<Fragment> fragments = new ArrayList<>();
+  private final ArrayList<Fragment> fragments = new ArrayList<>();
 
-    public MainFragmentPagerAdapter(FragmentManager fm) {
-        super(fm);
-        fragments.add(new StartFragment());
-        fragments.add(new HostsFragment());
-        fragments.add(new DNSFragment());
-    }
 
-    @Override
-    public Fragment getItem(int position) {
-        return fragments.get(position);
-    }
+  public MainFragmentPagerAdapter(FragmentManager fm) {
+    super(fm);
+    fragments.add(new StartFragment());
+    fragments.add(new HostsFragment());
+    fragments.add(new DNSFragment());
+  }
 
-    @Override
-    public int getCount() {
-        return fragments.size();
-    }
 
+  @Override
+  public Fragment getItem(int position) {
+    return fragments.get(position);
+  }
+
+
+  @Override
+  public int getCount() {
+    return fragments.size();
+  }
 }
