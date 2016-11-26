@@ -9,6 +9,16 @@
  */
 package com.avalond.ad_blocak.main;
 
+import static android.app.Activity.RESULT_OK;
+
+import com.avalond.ad_blocak.Configuration;
+import com.avalond.ad_blocak.FileHelper;
+import com.avalond.ad_blocak.MainActivity;
+import com.avalond.ad_blocak.R;
+import com.avalond.ad_blocak.vpn.AdVpnService;
+import com.avalond.ad_blocak.vpn.Command;
+import java.io.File;
+
 import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.DialogInterface;
@@ -24,16 +34,6 @@ import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.Switch;
 import android.widget.TextView;
-
-import com.avalond.ad_blocak.Configuration;
-import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.MainActivity;
-import com.avalond.ad_blocak.R;
-import com.avalond.ad_blocak.vpn.AdVpnService;
-import com.avalond.ad_blocak.vpn;
-import java.io.File;
-
-import static android.app.Activity.RESULT_OK;
 
 public class StartFragment extends Fragment {
   public static final int REQUEST_START_VPN = 1;

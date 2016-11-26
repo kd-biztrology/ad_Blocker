@@ -12,6 +12,6 @@ package com.avalond.ad_blocak.vpn;
 /**
  * Created by jak on 18/10/16.
  */
-enum Command {
+public enum Command {
   START, STOP
 }

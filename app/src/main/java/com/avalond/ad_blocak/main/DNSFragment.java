@@ -9,9 +9,7 @@
  */
 package com.avalond.ad_blocak.main;
 
-import com.avalond.ad_blocak.Configuration;
 import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.ItemChangedListener;
 import com.avalond.ad_blocak.MainActivity;
 import com.avalond.ad_blocak.R;
 
@@ -24,7 +22,6 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
 public class DNSFragment extends Fragment {
@@ -56,29 +53,20 @@ public class DNSFragment extends Fragment {
     itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.dns_add);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
-        MainActivity main = (MainActivity) getActivity();
-        main.editItem(null, new ItemChangedListener() {
-          @Override
-          public void onItemChanged(Configuration.Item item) {
-            MainActivity.config.dnsServers.items.add(item);
-            mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
-            FileHelper.writeSettings(getContext(), MainActivity.config);
-          }
-        });
-      }
+    fab.setOnClickListener(view -> {
+      MainActivity main = (MainActivity) getActivity();
+      main.editItem(null, item -> {
+        MainActivity.config.dnsServers.items.add(item);
+        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
+        FileHelper.writeSettings(getContext(), MainActivity.config);
+      });
     });
 
     Switch dnsEnabled = (Switch) rootView.findViewById(R.id.dns_enabled);
     dnsEnabled.setChecked(MainActivity.config.dnsServers.enabled);
-    dnsEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-      @Override
-      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-        MainActivity.config.dnsServers.enabled = isChecked;
-        FileHelper.writeSettings(getContext(), MainActivity.config);
-      }
+    dnsEnabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
+      MainActivity.config.dnsServers.enabled = isChecked;
+      FileHelper.writeSettings(getContext(), MainActivity.config);
     });
     return rootView;
   }
