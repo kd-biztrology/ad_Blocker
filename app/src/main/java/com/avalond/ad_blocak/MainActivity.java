@@ -37,6 +37,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * @author kevin
+ */
+
 public class MainActivity extends AppCompatActivity {
   private static final int REQUEST_FILE_OPEN = 1;
   private static final int REQUEST_FILE_STORE = 2;

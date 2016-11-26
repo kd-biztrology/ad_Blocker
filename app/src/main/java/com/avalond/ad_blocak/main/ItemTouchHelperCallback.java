@@ -19,6 +19,7 @@ import android.util.Log;
 
 /**
  * Simple ItemTouchHelper callback for a collection based adapter.
+ * @author kevin
  */
 class ItemTouchHelperCallback extends ItemTouchHelper.SimpleCallback {
   private final ItemRecyclerViewAdapter mAdapter;

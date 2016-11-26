@@ -9,9 +9,7 @@
  */
 package com.avalond.ad_blocak.main;
 
-import com.avalond.ad_blocak.Configuration;
 import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.ItemChangedListener;
 import com.avalond.ad_blocak.MainActivity;
 import com.avalond.ad_blocak.R;
 
@@ -24,9 +22,11 @@ import android.support.v7.widget.helper.ItemTouchHelper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 import android.widget.Switch;
 
+/**
+ * @author kevin
+ */
 public class HostsFragment extends Fragment {
 
   public HostsFragment() {
@@ -54,32 +54,23 @@ public class HostsFragment extends Fragment {
     itemTouchHelper.attachToRecyclerView(mRecyclerView);
 
     FloatingActionButton fab = (FloatingActionButton) rootView.findViewById(R.id.host_add);
-    fab.setOnClickListener(new View.OnClickListener() {
-      @Override
-      public void onClick(View view) {
+    fab.setOnClickListener(view -> {
 
-        final MainActivity main = (MainActivity) getActivity();
-        main.editItem(null, new ItemChangedListener() {
-          @Override
-          public void onItemChanged(Configuration.Item item) {
+      final MainActivity main = (MainActivity) getActivity();
+      main.editItem(null, item -> {
 
-            MainActivity.config.hosts.items.add(item);
-            mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
-            FileHelper.writeSettings(getContext(), MainActivity.config);
-          }
-        });
-      }
+        MainActivity.config.hosts.items.add(item);
+        mAdapter.notifyItemInserted(mAdapter.getItemCount() - 1);
+        FileHelper.writeSettings(getContext(), MainActivity.config);
+      });
     });
 
     Switch hostEnabled = (Switch) rootView.findViewById(R.id.host_enabled);
     hostEnabled.setChecked(MainActivity.config.hosts.enabled);
-    hostEnabled.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-      @Override
-      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    hostEnabled.setOnCheckedChangeListener((buttonView, isChecked) -> {
 
-        MainActivity.config.hosts.enabled = isChecked;
-        FileHelper.writeSettings(getContext(), MainActivity.config);
-      }
+      MainActivity.config.hosts.enabled = isChecked;
+      FileHelper.writeSettings(getContext(), MainActivity.config);
     });
 
     return rootView;

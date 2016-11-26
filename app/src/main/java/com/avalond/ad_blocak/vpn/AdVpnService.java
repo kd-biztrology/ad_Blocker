@@ -30,6 +30,10 @@ import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 
+/**
+ * @author kevin
+ */
+
 public class AdVpnService extends VpnService implements Handler.Callback {
   public static final int VPN_STATUS_STARTING = 0;
   public static final int VPN_STATUS_RUNNING = 1;

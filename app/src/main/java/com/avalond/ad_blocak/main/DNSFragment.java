@@ -24,6 +24,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Switch;
 
+/**
+ * @author kevin
+ */
 public class DNSFragment extends Fragment {
 
   public DNSFragment() {

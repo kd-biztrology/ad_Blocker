@@ -13,6 +13,10 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 
+/**
+ * @author kevin
+ */
+
 public class BootComplete extends BroadcastReceiver {
 
   @Override

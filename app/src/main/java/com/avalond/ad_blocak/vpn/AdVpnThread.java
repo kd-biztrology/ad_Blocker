@@ -54,6 +54,9 @@ import org.xbill.DNS.Flags;
 import org.xbill.DNS.Message;
 import org.xbill.DNS.Rcode;
 
+/**
+ * @author kevin
+ */
 class AdVpnThread implements Runnable {
   private static final String TAG = "AdVpnThread";
   private static final int MIN_RETRY_TIME = 5;

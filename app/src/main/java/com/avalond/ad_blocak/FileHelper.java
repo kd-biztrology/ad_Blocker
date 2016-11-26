@@ -32,6 +32,7 @@ import android.widget.Toast;
 
 /**
  * Utility class for working with files.
+ * @author kevin
  */
 
 public final class FileHelper {

@@ -17,6 +17,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 
 /**
  * Adapter for the pager that holds the fragments of the main activity.
+ * @author kevin
  */
 
 public class MainFragmentPagerAdapter extends FragmentPagerAdapter {

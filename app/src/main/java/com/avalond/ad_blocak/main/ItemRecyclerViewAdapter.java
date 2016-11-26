@@ -11,7 +11,6 @@ package com.avalond.ad_blocak.main;
 
 import com.avalond.ad_blocak.Configuration;
 import com.avalond.ad_blocak.FileHelper;
-import com.avalond.ad_blocak.ItemChangedListener;
 import com.avalond.ad_blocak.MainActivity;
 import com.avalond.ad_blocak.R;
 import java.util.List;
@@ -23,6 +22,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+/**
+ * @author kevin
+ */
 
 public class ItemRecyclerViewAdapter
     extends RecyclerView.Adapter<ItemRecyclerViewAdapter.ViewHolder> {
@@ -100,14 +103,11 @@ public class ItemRecyclerViewAdapter
       } else if (v == view) {
         // Start edit activity
         MainActivity main = (MainActivity) v.getContext();
-        main.editItem(item, new ItemChangedListener() {
-              @Override
-              public void onItemChanged(Configuration.Item changedItem) {
-                items.set(position, changedItem);
-                ItemRecyclerViewAdapter.this.notifyItemChanged(position);
-                FileHelper.writeSettings(itemView.getContext(), MainActivity.config);
-              }
-            }
+        main.editItem(item, changedItem -> {
+          items.set(position, changedItem);
+          ItemRecyclerViewAdapter.this.notifyItemChanged(position);
+          FileHelper.writeSettings(itemView.getContext(), MainActivity.config);
+        }
         );
       }
     }

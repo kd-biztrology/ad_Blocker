@@ -13,6 +13,7 @@ package com.avalond.ad_blocak;
  * A callback for returns from the {@link ItemActivity}.
  * The method {@link #onItemChanged(Configuration.Item)} will be called with a new item as
  * returned by the ItemActivity.
+ * @author kevin
  */
 public interface ItemChangedListener {
   void onItemChanged(Configuration.Item item);

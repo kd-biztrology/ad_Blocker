@@ -17,6 +17,7 @@ import com.stephentuso.welcome.WelcomeConfiguration;
 /**
  * Welcome activity.
  * This displays various informations for the first use of the app.
+ * @author kevin
  */
 public class DnsWelcomeActivity extends WelcomeActivity {
 

@@ -17,6 +17,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Spinner;
 
+/**
+ * @author kevin
+ */
 public class ItemActivity extends AppCompatActivity {
 
   private TextInputEditText locationText;

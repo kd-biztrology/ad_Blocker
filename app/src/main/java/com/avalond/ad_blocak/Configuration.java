@@ -20,6 +20,7 @@ import android.util.JsonWriter;
  * Configuration class. This is serialized as JSON using read() and write() methods.
  *
  * @author Julian Andres Klode
+ * @author kevin
  */
 public class Configuration {
 
