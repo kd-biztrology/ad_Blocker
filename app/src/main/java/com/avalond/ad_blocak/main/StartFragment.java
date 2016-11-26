@@ -30,7 +30,7 @@ import com.avalond.ad_blocak.FileHelper;
 import com.avalond.ad_blocak.MainActivity;
 import com.avalond.ad_blocak.R;
 import com.avalond.ad_blocak.vpn.AdVpnService;
-import com.avalond.ad_blocak.vpn.Command;
+import com.avalond.ad_blocak.vpn;
 import java.io.File;
 
 import static android.app.Activity.RESULT_OK;
