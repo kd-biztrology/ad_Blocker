@@ -52,7 +52,9 @@ public class Configuration {
     return hosts;
   }
 
-
+  /**
+   * DNS serves
+    */
   private static DnsServers readDnsServers(JsonReader reader) throws IOException {
 
     DnsServers servers = new DnsServers();
